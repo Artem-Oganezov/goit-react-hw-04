@@ -8,6 +8,9 @@ import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import Loader from "./Loader/Loader";
 import { Toaster } from "react-hot-toast";
 import ErrorMessage from "./ErrorMessage/ErrorMessage";
+import ImageModal from "./ImageModal/ImageModal";
+import ReactModal from "react-modal";
+ReactModal.setAppElement("#root");
 
 function App() {
   const [data, setData] = useState([]);
@@ -16,10 +19,23 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [totalPage, setTotalPage] = useState(1);
   const [isError, setIsError] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState(null);
+
+  const handleImage = (image) => {
+    setCurrentImage(image);
+    openModal();
+  };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   useEffect(() => {
     const controller = new AbortController();
-
     const fetchData = async () => {
       try {
         setIsLoading(true);
@@ -86,12 +102,17 @@ function App() {
       <div>
         <SearchBar handleChangeValue={handleChangeValue} />
         {isError && <ErrorMessage />}
-        <ImageGallery data={data} />
+        <ImageGallery data={data} handleImage={handleImage} />
         {isLoading && <Loader />}
 
         {page < totalPage && !isLoading && (
           <LoadMoreBtn loadMoreI={loadMoreImg} />
         )}
+        <ImageModal
+          isOpen={modalIsOpen}
+          onClose={closeModal}
+          image={currentImage}
+        />
       </div>
     </>
   );

@@ -1,7 +1,6 @@
 .img {
   width: 400px;
-  height: 275px;
+  height: 300px;
   object-fit: cover;
-  display: block;
   border-radius: 8px;
 }

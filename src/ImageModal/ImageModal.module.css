@@ -1,0 +1,9 @@
+.img_modal {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 20px;
+  cursor: pointer;
+}

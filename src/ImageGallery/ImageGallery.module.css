@@ -5,3 +5,10 @@
   gap: 24px;
   padding: 25px;
 }
+
+.li {
+  width: 400px;
+  height: 300px;
+  border-radius: 8px;
+  background-color: rgb(78, 77, 77);
+}
